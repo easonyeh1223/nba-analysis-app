@@ -7,7 +7,7 @@ from nba_api.stats.endpoints import playercareerstats, shotchartdetail
 
 # --- 1. 網頁基本設定 ---
 st.set_page_config(
-    page_title="NBA 數據分析助手",
+    page_title="NBA Stats",
     page_icon="🏀",
     layout="wide"
 )
@@ -51,15 +51,15 @@ def get_shot_data(pid):
 
 # --- 3. 側邊欄設計 ---
 with st.sidebar:
-    st.header("🏀 球員搜尋")
+    st.header("球員搜尋")
     st.write("請輸入 NBA 球員的英文全名")
     player_input = st.text_input("球員姓名", "Stephen Curry")
-    if st.button("開始分析 🚀"):
+    if st.button("開始分析"):
         st.session_state['search_clicked'] = True
 
 # --- 4. 主畫面邏輯 ---
-st.title("🏀 NBA 球員表現數據視覺化系統")
-st.markdown("### 進階程式設計期末專題報告 - 30625 葉宇森")
+st.title("NBA 球員表現數據視覺化系統")
+st.markdown("### 進階程式設計期末專題報告 - 306 25 葉宇森")
 st.markdown("---")
 
 if st.session_state.get('search_clicked'):
@@ -67,12 +67,12 @@ if st.session_state.get('search_clicked'):
         pid = get_player_id(player_input)
         
         if not pid:
-            st.error(f"❌ 找不到球員：{player_input}，請確認拼字。")
+            st.error(f"找不到球員：{player_input}，請確認拼字。")
         else:
             df_career = get_career_data(pid)
             
             if df_career is not None:
-                st.success(f"✅ 成功取得 {player_input} 的數據！")
+                st.success(f"成功取得 {player_input} 的數據！")
                 
                 # --- 第一區：關鍵數據儀表板 (Metrics) ---
                 col1, col2, col3, col4 = st.columns(4)
@@ -95,7 +95,7 @@ if st.session_state.get('search_clicked'):
                 st.markdown("---")
 
                 # --- 第二區：圖表切換 ---
-                tab1, tab2, tab3 = st.tabs(["📈 得分趨勢圖", "🎯 投籃熱點分析", "📄 詳細數據表"])
+                tab1, tab2, tab3 = st.tabs(["得分趨勢圖", "投籃熱點分析", "詳細數據表"])
                 
                 with tab1:
                     st.subheader(f"{player_input} 生涯得分變化")
